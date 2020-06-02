@@ -9,7 +9,7 @@ import org.json.JSONArray;
 
 public class WeatherMain {
 	//common method to get json object from given url object
-	public JSONObject common_meth(URL url) {
+	public JSONObject CommonMethod(URL url) {
 		StringBuilder sb = new StringBuilder();
 		try{
 			//create https connection
@@ -41,7 +41,6 @@ public class WeatherMain {
 		return json;
 	}
 	
-	
 	public static void main(String[] args)  {
 		//check args has passed or not
 		if (args.length > 0) 
@@ -51,11 +50,11 @@ public class WeatherMain {
 				//
 				URL url = new URL("https://api.weather.gov/points/" + args[0]);
 				WeatherMain weather = new WeatherMain();
-				JSONObject json = weather.common_meth(url);
+				JSONObject json = weather.CommonMethod(url);
 				String forecast = json.getJSONObject("properties").getString("forecast");
 
 				URL urlforecast = new URL(forecast);
-				JSONObject jsonforecast = weather.common_meth(urlforecast);
+				JSONObject jsonforecast = weather.CommonMethod(urlforecast);
 				//parse properties and then nested periods list as JSON object
 				JSONObject forecastjson = jsonforecast.getJSONObject("properties");
 				JSONArray forecastperiods = forecastjson.getJSONArray("periods");
